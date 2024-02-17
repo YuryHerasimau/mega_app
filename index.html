@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA App</title>
+</head>
+<body>
+    <!-- Форма для генерации csv файла -->
+    <form action="/generate_csv" method="POST" enctype="multipart/form-data">
+        <p>CSV generator</p>
+        <label for="csv_data">Data:</label><br>
+        <input type="text" id="csv_data" name="csv_data"><br>
+        <label for="actions">Choose action:</label>
+        <select name="actions" id="actions">
+            <option value="parse">parse</option>
+            <option value="filter">filter</option>
+            <option value="sort">sort</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+    <hr>
+    <!-- Форма для генерации паролей -->
+    <form action="/passw" method="POST" enctype="multipart/form-data">
+        <p>Password generator</p>
+        <label for="qty">How much to generate:</label><br>
+        <input type="text" name="qty" id="qty"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
