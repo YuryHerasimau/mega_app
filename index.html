@@ -27,6 +27,22 @@
         <input type="text" name="qty" id="qty"><br>
         <input type="submit" value="Submit">
     </form>
+    <hr>
+    <!-- Форма для генерации фейковых данных -->
+    <form action="/fake_data" method="POST" enctype="multipart/form-data">
+        <h3>Fake data generator</h3>
+        <label for="">What data to generate:</label><br />
+        <select name="data_type" id="data_type">
+            <option value="name">name</option>
+            <option value="address">address</option>
+            <option value="text">text</option>
+            <option value="ipv4">ipv4</option>
+            <option value="user_agent">user_agent</option>
+            <option value="credit_card">credit_card</option>
+            <option value="geo">geo</option>
+        </select>
+        <input type="submit" value="Submit" />
+    </form>
 
 </body>
 </html>

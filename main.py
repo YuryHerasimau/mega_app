@@ -1,5 +1,7 @@
 # import json
-from flask import Flask, request
+from flask import Flask, request, jsonify
+
+import fake_data
 import generate_csv
 import generate_passwords
 
@@ -28,3 +30,8 @@ def gen_pass():
     print(qty)
     return generate_passwords.multiple(qty)
 
+@app.route('/fake_data', methods=['POST'])
+def gen_fake():
+    data_type = request.form['data_type']
+    generated_fake_data = fake_data.generate(data_type=data_type)
+    return jsonify(generated_fake_data)
