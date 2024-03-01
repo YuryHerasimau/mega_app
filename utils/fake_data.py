@@ -1,3 +1,4 @@
+import json
 from faker import Faker
 from faker.providers import internet, credit_card
 
@@ -7,7 +8,7 @@ def generate(data_type: str) -> str | list:
     Generate fake data based on the specified data_type
     """
     fake = Faker()
-    
+
     if data_type == 'name':
         return fake.name()
 
@@ -34,4 +35,5 @@ def generate(data_type: str) -> str | list:
         return fake.credit_card_full() #.split('\n')
 
     if data_type == 'geo':
-        return fake.location_on_land()
+        geo = fake.location_on_land()
+        return json.dumps(geo)
