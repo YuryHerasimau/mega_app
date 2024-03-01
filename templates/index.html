@@ -21,7 +21,7 @@
     </form>
     <hr>
     <!-- Форма для генерации паролей -->
-    <form action="/passw" method="POST" enctype="multipart/form-data">
+    <form action="/generate_credentials" method="POST" enctype="multipart/form-data">
         <p>Password generator</p>
         <label for="qty">How much to generate:</label><br>
         <input type="text" name="qty" id="qty"><br>
@@ -29,7 +29,7 @@
     </form>
     <hr>
     <!-- Форма для генерации фейковых данных -->
-    <form action="/fake_data" method="POST" enctype="multipart/form-data">
+    <form action="/generate_fake_data" method="POST" enctype="multipart/form-data">
         <h3>Fake data generator</h3>
         <label for="">What data to generate:</label><br />
         <select name="data_type" id="data_type">

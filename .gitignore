@@ -12,4 +12,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# PyCharm
 .idea/
+
+# Generated files
+config.csv
