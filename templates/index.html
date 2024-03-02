@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QA App</title>
+  </head>
+  <body>
+    <!-- Форма для генерации csv файла -->
+    <form
+        action="/generate_csv"
+        method="POST"
+        enctype="multipart/form-data"
+    >
+      <h3>CSV generator</h3>
+      <label for="csv_data">Data:</label><br />
+      <input type="text" id="csv_data" name="csv_data" /><br />
+      <label for="actions">Choose action:</label>
+      <select name="actions" id="actions">
+        <option value="parse">parse</option>
+        <option value="filter">filter</option>
+        <option value="sort">sort</option>
+      </select>
+      <input type="submit" value="Submit" />
+    </form>
+
+    <hr />
+
+    <!-- Форма для генерации паролей -->
+    <form
+      action="/generate_credentials"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <h3>Password generator</h3>
+      <label for="qty">How much to generate:</label><br />
+      <input type="text" name="qty" id="qty" /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <hr />
+
+    <!-- Форма для генерации фейковых данных -->
+    <form
+      action="/generate_fake_data"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <h3>Fake data generator</h3>
+      <label for="">What data to generate:</label><br />
+      <select name="data_type" id="data_type">
+        <option value="name">name</option>
+        <option value="address">address</option>
+        <option value="text">text</option>
+        <option value="ipv4">ipv4</option>
+        <option value="user_agent">user_agent</option>
+        <option value="credit_card">credit_card</option>
+        <option value="geo">geo</option>
+      </select>
+      <input type="submit" value="Submit" />
+    </form>
+
+    <hr />
+
+    <!-- Форма для парсинга JSON -->
+    <form
+        action="/parse_json"
+        method="POST"
+        enctype="multipart/form-data"
+    >
+      <h3>JSON parser</h3>
+      <label for="cnvrt">Enter specific fields:</label><br />
+      <input type="text" name="cnvrt" id="cnvrt" /><br />
+      <p>Upload a file:</p>
+      <label for="file">File:</label><br>
+      <input type="file" name="file" id="file" /><br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

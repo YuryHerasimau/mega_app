@@ -1,9 +1,5 @@
-# import json
 from flask import Flask, request, jsonify
-
-import fake_data
-import generate_csv
-import generate_passwords
+from utils import custom_csv, custom_credentials, fake_data, custom_json
 
 
 app = Flask(__name__)
@@ -11,27 +7,38 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    with open('index.html') as html_file:
+    with open('templates/index.html') as html_file:
         return html_file.read()
     
 
 @app.route('/generate_csv', methods=['POST'])
-def csv_generator():
-    print(request.form)
+def generate_csv():
     data = request.form['csv_data']
     action = request.form['actions']
-    generate_csv.generate(data, action)
+    custom_csv.generate(data=data, action=action)
     return 'CSV file generated, return to the <a href="/">main</a> page'
 
 
-@app.route('/passw', methods=['POST'])
-def gen_pass():
+@app.route('/generate_credentials', methods=['POST'])
+def generate_credentials():
     qty = int(request.form['qty'])
-    print(qty)
-    return generate_passwords.multiple(qty)
+    return custom_credentials.multiple(number=qty)
 
-@app.route('/fake_data', methods=['POST'])
-def gen_fake():
+
+@app.route('/generate_fake_data', methods=['POST'])
+def generate_fake_data():
     data_type = request.form['data_type']
-    generated_fake_data = fake_data.generate(data_type=data_type)
-    return jsonify(generated_fake_data)
+    return fake_data.generate(data_type=data_type)
+
+
+@app.route('/parse_json', methods=['POST'])
+def parse_json():
+    fields_list = request.form['cnvrt'].split(',')
+    uploaded_file = request.files['file']
+    filename = uploaded_file.filename
+    uploaded_file.save(filename)
+    return custom_json.read(FILENAME=filename, FIELDS_LIST=fields_list)
+
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
