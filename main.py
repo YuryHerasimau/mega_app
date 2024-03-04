@@ -33,7 +33,11 @@ def generate_fake_data():
 
 @app.route('/parse_json', methods=['POST'])
 def parse_json():
-    fields_list = request.form['cnvrt'].split(',')
+    # Получаем строку с полями из HTML формы
+    fields_input = request.form['cnvrt']
+    # Удаляем пробелы в начале и в конце каждого значения и разделяем строку на список
+    fields_list = [field.strip() for field in fields_input.split(',')]
+
     uploaded_file = request.files['file']
     filename = uploaded_file.filename
     uploaded_file.save(filename)
