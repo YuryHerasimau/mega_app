@@ -13,14 +13,9 @@ def read(FILENAME: str, FIELDS_LIST: list) -> list:
         json_data = json.load(json_file)['couriers']
     
     result = []
-    entry = {}
-
     for obj in json_data:
+        entry = {} # Создаем новый словарь для каждого объекта json
         for field in FIELDS_LIST:
             entry[field] = obj.get(field)
         result.append(entry)
     return result
-
-
-# if __name__ == "__main__":
-#     print(read(FILENAME, FIELDS_LIST))
