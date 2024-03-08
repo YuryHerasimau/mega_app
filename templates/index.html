@@ -76,5 +76,27 @@
       <input type="file" name="file" id="file" /><br />
       <input type="submit" value="Submit" />
     </form>
+
+    <hr />
+
+    <!-- Форма для генерации файлов -->
+    <form
+      action="/generate_file"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <h3>File generator</h3>
+      <label for="filename">File name:</label><br />
+      <input type="text" name="filename" id="filename" /><br />
+      <label for="size">File size (KB):</label><br />
+      <input type="text" name="size" id="size" /><br />
+      <label for="extension">File extension:</label><br />
+      <input type="text" name="extension" id="extension" /><br />
+      <label for="num_files">Number of files:</label><br />
+      <input type="text" name="num_files" id="num_files" /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <hr />
   </body>
 </html>

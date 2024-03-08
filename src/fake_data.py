@@ -7,6 +7,7 @@ def generate(data_type: str) -> str | list:
     """
     Generate fake data based on the specified data_type
     """
+    
     fake = Faker()
 
     if data_type == 'name':
