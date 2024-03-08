@@ -55,7 +55,7 @@ def generate_file():
         file_extension=file_extension,
         num_files=num_files
     )
-    return f'{num_files} files generated, size={size_in_kb / 1000} Mb, return to the <a href="/">main</a> page'
+    return f'{num_files} files generated, return to the <a href="/">main</a> page'
 
 
 if __name__ == "__main__":
