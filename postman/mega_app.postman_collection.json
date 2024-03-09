@@ -1,0 +1,504 @@
+{
+	"info": {
+		"_postman_id": "24aef5f0-4b05-410a-8ecd-d1c29f2861e4",
+		"name": "mega_app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25076336",
+		"_collection_link": "https://project-1c-logistic.postman.co/workspace/1C-Logistic-Team-Workspace~9b2c8c66-8aac-462c-9ce3-319d57c71576/collection/25076336-24aef5f0-4b05-410a-8ecd-d1c29f2861e4?action=share&source=collection_link&creator=25076336"
+	},
+	"item": [
+		{
+			"name": "Get Index",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response Content-Type is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/html; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"HTML response contains submit input elements\", function () {\r",
+							"    var responseData = pm.response.text();\r",
+							"\r",
+							"    pm.expect(responseData).to.include('<input type=\"submit\" value=\"Submit\" />');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"CSV generator form contains tags and input elements\", function () {\r",
+							"    var responseData = pm.response.text();\r",
+							"\r",
+							"    pm.expect(responseData).to.include('action=\"/generate_csv\"');\r",
+							"    pm.expect(responseData).to.include('<h3>CSV generator</h3>');\r",
+							"    pm.expect(responseData).to.include('<input type=\"text\" id=\"csv_data\" name=\"csv_data\" />');\r",
+							"    pm.expect(responseData).to.include('<select name=\"actions\" id=\"actions\">');\r",
+							"    pm.expect(responseData).to.include('<option value=\"parse\">parse</option>');\r",
+							"    pm.expect(responseData).to.include('<option value=\"filter\">filter</option>');\r",
+							"    pm.expect(responseData).to.include('<option value=\"sort\">sort</option>');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Password generator form contains tags and input elements\", function () {\r",
+							"    var responseData = pm.response.text();\r",
+							"\r",
+							"    pm.expect(responseData).to.include('action=\"/generate_credentials\"');\r",
+							"    pm.expect(responseData).to.include('<h3>Password generator</h3>');\r",
+							"    pm.expect(responseData).to.include('<input type=\"text\" name=\"qty\" id=\"qty\" />');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Fake data generator form contains tags and input elements\", function () {\r",
+							"    var responseData = pm.response.text();\r",
+							"\r",
+							"    pm.expect(responseData).to.include('action=\"/generate_fake_data\"');\r",
+							"    pm.expect(responseData).to.include('<h3>Fake data generator</h3>');\r",
+							"    pm.expect(responseData).to.include('<select name=\"data_type\" id=\"data_type\">');\r",
+							"    pm.expect(responseData).to.include('<option value=\"name\">name</option>');\r",
+							"    pm.expect(responseData).to.include('<option value=\"address\">address</option>');\r",
+							"    pm.expect(responseData).to.include('<option value=\"text\">text</option>');\r",
+							"    pm.expect(responseData).to.include('<option value=\"ipv4\">ipv4</option>');\r",
+							"    pm.expect(responseData).to.include('<option value=\"user_agent\">user_agent</option>');\r",
+							"    pm.expect(responseData).to.include('<option value=\"credit_card\">credit_card</option>');\r",
+							"    pm.expect(responseData).to.include('<option value=\"geo\">geo</option>');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"JSON parser form contains tags and input elements\", function () {\r",
+							"    var responseData = pm.response.text();\r",
+							"\r",
+							"    pm.expect(responseData).to.include('action=\"/parse_json\"');\r",
+							"    pm.expect(responseData).to.include('<h3>JSON parser</h3>');\r",
+							"    pm.expect(responseData).to.include('<input type=\"text\" name=\"cnvrt\" id=\"cnvrt\" />');\r",
+							"    pm.expect(responseData).to.include('<input type=\"file\" name=\"file\" id=\"file\" />');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"File generator form contains tags and input elements\", function () {\r",
+							"    var responseData = pm.response.text();\r",
+							"\r",
+							"    pm.expect(responseData).to.include('action=\"/generate_file\"');\r",
+							"    pm.expect(responseData).to.include('<h3>File generator</h3>');\r",
+							"    pm.expect(responseData).to.include('<input type=\"text\" name=\"filename\" id=\"filename\" />');\r",
+							"    pm.expect(responseData).to.include('<input type=\"text\" name=\"size\" id=\"size\" />');\r",
+							"    pm.expect(responseData).to.include('<input type=\"text\" name=\"extension\" id=\"extension\" />');\r",
+							"    pm.expect(responseData).to.include('<input type=\"text\" name=\"num_files\" id=\"num_files\" />');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate csv file",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response Content-Type is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/html; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"String in the response is as expected\", function () {\r",
+							"    const responseData = pm.response.text();\r",
+							"    const expectedString = 'CSV file generated, return to the <a href=\"/\">main</a> page'\r",
+							"    \r",
+							"    pm.expect(responseData).to.exist.and.to.be.a('string', responseData);\r",
+							"    pm.expect(responseData).to.include(expectedString);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csv_data",
+							"value": "{{$randomLoremParagraph}}",
+							"description": "The data provided as input to the function",
+							"type": "text"
+						},
+						{
+							"key": "actions",
+							"value": "filter",
+							"description": "The randomly chosen action from ['parse', 'filter', 'sort']",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/generate_csv",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"generate_csv"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is within acceptable range\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has a Content-Type header of application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response includes a non-empty array of generated credentials\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"\r",
+							"  pm.expect(responseData).to.be.an('array').and.to.have.lengthOf.at.least(1, \"Array should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Each credential in the array has a valid format\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('array');\r",
+							"    responseData.forEach(function(credential) {\r",
+							"        pm.expect(credential).to.be.a('string').and.to.match(/[a-zA-Z0-9]{8,}/, \"Credential format is invalid\");\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify the response contains the expected number of credentials\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('array');\r",
+							"    pm.expect(responseData).to.have.lengthOf.at.least(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response includes the required fields for each credential\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('array').that.is.not.empty;\r",
+							"    responseData.forEach(function(credential) {\r",
+							"        pm.expect(credential).to.be.an('string');\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has a proper structure and no unexpected fields\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('array');\r",
+							"    responseData.forEach(function(credential) {\r",
+							"        pm.expect(credential).to.be.a('string');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "qty",
+							"value": "{{$randomInt}}",
+							"description": "Generate a pair of login and password based on the input number",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/generate_credentials",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"generate_credentials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate fake data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/generate_fake_data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"generate_fake_data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse JSON",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has a Content-Type header of application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has a valid JSON format\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields\", function () {\r",
+							"    // Extract the values passed in the request parameters\r",
+							"    const requestData = pm.request.body.formdata.get('cnvrt');\r",
+							"    const keys = requestData.split(',').map(key => key.trim()); // Trim whitespace from keys\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('array');\r",
+							"    \r",
+							"    responseData.forEach(function(item) {\r",
+							"        keys.forEach(function(key) {\r",
+							"            pm.expect(item).to.have.property(key);\r",
+							"        });\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cnvrt",
+							"value": "user, mood, external_id",
+							"description": "Specific fields of the JSON file that need to be extracted",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Юрий/Downloads/couriers.json"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/parse_json",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"parse_json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate files",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is within acceptable range\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response Content-Type is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/html; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"String in the response is as expected\", function () {\r",
+							"    const responseData = pm.response.text();\r",
+							"    const requestNumFiles = pm.request.body.formdata.get('num_files');\r",
+							"\r",
+							"    const expectedString = `${requestNumFiles} files generated, return to the <a href=\"/\">main</a> page`;\r",
+							"\r",
+							"    pm.expect(responseData).to.exist.and.to.be.a('string', responseData);\r",
+							"    pm.expect(responseData).to.include(expectedString);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "filename",
+							"value": "{{$randomFileType}}",
+							"type": "text"
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"description": "kylobytes",
+							"type": "text"
+						},
+						{
+							"key": "extension",
+							"value": "{{$randomCommonFileExt}}",
+							"type": "text"
+						},
+						{
+							"key": "num_files",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/generate_file",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"generate_file"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
