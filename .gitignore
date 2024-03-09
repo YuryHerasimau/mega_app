@@ -16,5 +16,5 @@ __pycache__/
 .idea/
 
 # Generated files
-config.csv
 couriers.json
+output/
