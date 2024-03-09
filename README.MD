@@ -1,7 +1,8 @@
 # QA app by group_qa_the_best
 
 ## Description
-A web application to assist QA engineers in their daily work
+A web application to assist QA engineers in their daily work.
+Postman test suite is included.
 
 ## Getting started
 ### Installing 
