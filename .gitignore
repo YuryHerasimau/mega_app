@@ -16,5 +16,8 @@ __pycache__/
 .idea/
 
 # Generated files
-couriers.json
+*.json
 output/
+
+# Stuff
+*.log
