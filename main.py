@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    with open('templates/index.html') as html_file:
+    with open('templates/index.html', encoding='utf-8') as html_file:
         return html_file.read()
     
 
@@ -21,8 +21,14 @@ def generate_csv():
 
 @app.route('/generate_credentials', methods=['POST'])
 def generate_credentials():
-    qty = int(request.form['qty'])
-    return custom_credentials.multiple(number=qty)
+    try:
+        qty = int(request.form['qty'])
+        if qty <= 0:
+            return jsonify({'error': 'Quantity must be a positive integer.'}), 400
+        else:
+            return custom_credentials.multiple(number=qty)
+    except ValueError:
+        return jsonify({'error': 'Invalid input. Quantity must be a positive integer.'}), 400
 
 
 @app.route('/generate_fake_data', methods=['POST'])
