@@ -54,7 +54,7 @@
 							"\r",
 							"    pm.expect(responseData).to.include('action=\"/generate_credentials\"');\r",
 							"    pm.expect(responseData).to.include('<h3>Password generator</h3>');\r",
-							"    pm.expect(responseData).to.include('<input type=\"text\" name=\"qty\" id=\"qty\" />');\r",
+							"    pm.expect(responseData).to.include('<input type=\"number\" name=\"qty\" id=\"qty\" min=\"1\" max=\"1000\" required />');\r",
 							"});\r",
 							"\r",
 							"\r",
