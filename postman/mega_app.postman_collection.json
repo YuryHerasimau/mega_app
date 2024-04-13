@@ -54,7 +54,7 @@
 							"\r",
 							"    pm.expect(responseData).to.include('action=\"/generate_credentials\"');\r",
 							"    pm.expect(responseData).to.include('<h3>Password generator</h3>');\r",
-							"    pm.expect(responseData).to.include('<input type=\"number\" name=\"qty\" id=\"qty\" min=\"1\" max=\"1000\" required />');\r",
+							"    pm.expect(responseData).to.include('<input type=\"number\" name=\"qty\" id=\"qty\" min=\"1\" max=\"1000\" required /><br />');\r",
 							"});\r",
 							"\r",
 							"\r",
@@ -96,7 +96,8 @@
 							"});\r",
 							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -495,6 +496,65 @@
 					"port": "5000",
 					"path": [
 						"generate_file"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate courier route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is within acceptable range\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Response Content-Type is image/png\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"image/png\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response data should not be null\", function () {",
+							"    pm.expect(pm.response.text()).to.not.equal(\"null\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "coordinates",
+							"value": "[(55.798589,37.595669),(55.798812,37.59625),(55.801581,37.596292),(55.802485,37.596124),(55.802684,37.59616),(55.802795,37.596163),(55.802898,37.595838),(55.804315,37.595582),(55.805181,37.595384),(55.80532,37.595299),(55.805429,37.595249),(55.805415,37.594488),(55.805674,37.594479)]",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/generate_courier_route",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"generate_courier_route"
 					]
 				}
 			},

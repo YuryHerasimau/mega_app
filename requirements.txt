@@ -1,2 +1,5 @@
 Flask==3.0.2
 Faker==23.2.1
+requests==2.31.0
+Pillow==10.3.0
+python-dotenv==1.0.1

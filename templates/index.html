@@ -98,5 +98,21 @@
     </form>
 
     <hr />
+
+    
+    <!-- Форма для генерации маршрута курьера на карте -->
+    <form
+        action="/generate_courier_route"
+        method="POST"
+        enctype="multipart/form-data"
+    >
+      <h3>Courier route generator</h3>
+      <label for="coordinates">Enter coordinates:</label><br />
+      <textarea name="coordinates" id="coordinates" cols="30" rows="10"></textarea>
+      <input type="submit" value="Submit" />
+    </form>
+
+    <hr />
+
   </body>
 </html>

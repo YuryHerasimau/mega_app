@@ -1,5 +1,7 @@
-from flask import Flask, request, jsonify
-from src import custom_csv, custom_credentials, fake_data, custom_json, custom_file
+import io
+from flask import Flask, request, jsonify, send_file
+from werkzeug.utils import secure_filename
+from src import custom_csv, custom_credentials, fake_data, custom_json, custom_file, courier_route
 
 
 app = Flask(__name__)
@@ -62,6 +64,13 @@ def generate_file():
         num_files=num_files
     )
     return f'{num_files} files generated, return to the <a href="/">main</a> page'
+
+
+@app.route('/generate_courier_route', methods=['POST'])
+def generate_courier_route():
+    coordinates = request.form['coordinates']
+    bytes_data = courier_route.get_map(coordinates=coordinates)
+    return send_file(io.BytesIO(bytes_data), mimetype='image/png')
 
 
 if __name__ == "__main__":
