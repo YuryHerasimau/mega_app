@@ -1,5 +1,5 @@
 import io
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, render_template
 from werkzeug.utils import secure_filename
 from src import custom_csv, custom_credentials, fake_data, custom_json, custom_file, courier_route
 
@@ -9,8 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    with open('templates/index.html', encoding='utf-8') as html_file:
-        return html_file.read()
+    return render_template("index.html")
     
 
 @app.route('/generate_csv', methods=['POST'])
