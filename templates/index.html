@@ -1,119 +1,197 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="card-deck mb-3 text-center">
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">🔑 Password generator</h4>
-        </div>
-        <div class="card-body">
-          <p>Generate a given number of login/password pairs</p>
-          <!-- Форма для генерации паролей -->
-          <form action="/generate_credentials" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-              <input type="number" class="form-control" name="qty" id="qty" min="1" max="1000" placeholder="Enter number" required><br />
-              <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
-            </div>
-          </form>
-        </div>
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">🔑 Password generator</h4>
       </div>
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">📜 CSV generator</h4>
-        </div>
-        <div class="card-body">
-          <p>Generate a CSV file based on the provided data and action</p>
-          <!-- Форма для генерации csv файла -->
-          <form action="/generate_csv" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-              <input type="text" class="form-control" id="csv_data" name="csv_data" placeholder="Enter text data">
-              <select name="actions" class="form-control" id="actions">
-                <option selected>--Choose an action--</option>
-                <option value="parse">parse</option>
-                <option value="filter">filter</option>
-                <option value="sort">sort</option>
-              </select><br />
-              <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">🤥 Fake data generator</h4>
-        </div>
-        <div class="card-body">
-          <p>Generate fake data based on the specified data type</p>
-          <!-- Форма для генерации фейковых данных -->
-          <form action="/generate_fake_data" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-              <select name="data_type" class="form-control" id="data_type">
-                <option selected>--Choose a data type--</option>
-                <option value="name">name</option>
-                <option value="address">address</option>
-                <option value="text">text</option>
-                <option value="ipv4">ipv4</option>
-                <option value="user_agent">user_agent</option>
-                <option value="credit_card">credit_card</option>
-                <option value="geo">geo</option>
-              </select><br />
-              <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
-            </div>
-          </form>
-        </div>
+      <div class="card-body">
+        <p>Generate a given number of username/password pairs</p>
+        <!-- Форма для генерации паролей -->
+        <form action="/generate_credentials" method="POST" enctype="multipart/form-data" id="form1">
+          <div class="form-group">
+            <input type="text" class="form-control" name="username_base" id="username_base" placeholder="Enter a sample username" required>
+            <input type="number" class="form-control" name="qty" id="qty" min="1" max="1000" placeholder="Enter number" required>
+            <input type="number" class="form-control" name="length" id="length" min="5" max="1000" placeholder="Enter password length" required><br />
+            <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton1" disabled>Submit</button>
+          </div>
+        </form>
       </div>
     </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">📜 CSV generator</h4>
+      </div>
+      <div class="card-body">
+        <p>Generate a CSV file based on the data and action</p>
+        <!-- Форма для генерации csv файла -->
+        <form action="/generate_csv" method="POST" enctype="multipart/form-data" id="form2">
+          <div class="form-group">
+            <input type="text" class="form-control" id="csv_data" name="csv_data" placeholder="Enter text data"><br />
+            <select name="actions" class="form-control" id="actions">
+              <option selected value="">--Choose an action--</option>
+              <option value="parse">parse</option>
+              <option value="filter">filter</option>
+              <option value="sort">sort</option>
+            </select><br />
+            <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton2" disabled>Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">🤥 Fake data generator</h4>
+      </div>
+      <div class="card-body">
+        <p>Generate synthetic data</p>
+        <!-- Форма для генерации фейковых данных -->
+        <form action="/generate_fake_data" method="POST" enctype="multipart/form-data" id="form3">
+          <div class="form-group">
+            <div class="form-check">
+              <label class="form-check-label">Select locale:</label><br />
+              <input type="radio" name="locale" id="localeRadio1" value="en_US" checked> USA
+              <input type="radio" name="locale" id="localeRadio2" value="de_DE"> German
+              <input type="radio" name="locale" id="localeRadio3" value="ru_RU"> Russian
+              <input type="radio" name="locale" id="localeRadio4" value="ja"> Japanese
+              <br /><br />
+            </div>
+            <select name="data_type" class="form-control" id="data_type">
+              <option selected value="">--Choose a data type--</option>
+              <option value="name">name</option>
+              <option value="phone_number">phone number</option>
+              <option value="address">address</option>
+              <option value="email">email</option>
+              <option value="country">country</option>
+              <option value="city">city</option>
+              <option value="text">text</option>
+              <option value="ipv4">ipv4</option>
+              <option value="user_agent">user agent</option>
+              <option value="company">company</option>
+              <option value="credit_card">credit card</option>
+              <option value="geo">geolocation</option>
+            </select><br />
+            <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton3" disabled>Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    <div class="card-deck mb-3 text-center">
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">🗃️ File generator</h4>
-        </div>
-        <div class="card-body">
-          <p>Generate files with the given parameters</p>
-          <!-- Форма для генерации файлов -->
-          <form action="/generate_file" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-              <input type="text" class="form-control" name="filename" id="filename" placeholder="File name">
-              <input type="text" class="form-control" name="size" id="size" placeholder="File size (KB)">
-              <input type="text" class="form-control" name="extension" id="extension" placeholder="File extension">
-              <input type="number" class="form-control" name="num_files" id="num_files" placeholder="Number of files"><br />
-              <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
-            </div>
-          </form>
-        </div>
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">🗃️ File generator</h4>
       </div>
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">🤏 JSON parser</h4>
-        </div>
-        <div class="card-body">
-          <p>Read JSON data from a file and extract specific fields for each object</p>
-          <!-- Форма для парсинга JSON -->
-          <form action="/parse_json" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-              <input type="text" class="form-control" name="cnvrt" id="cnvrt" placeholder="Comma separated list of JSON keys"><br />
-              <input type="file" class="form-control-file" name="file" id="file"><br />
-              <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="card mb-4 box-shadow">
-        <div class="card-header">
-          <h4 class="my-0 font-weight-normal">🗺️ Courier route generator</h4>
-        </div>
-        <div class="card-body">
-          <p>Generate an image of the courier's route on the map</p>
-          <!-- Форма для генерации маршрута курьера на карте -->
-          <form action="/generate_courier_route" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-              <textarea name="coordinates" class="form-control" id="coordinates" cols="30" rows="5" placeholder="Enter coordinates in the format [(55.805674,37.594479),(55.805674,37.594479), ...]"></textarea><br />
-              <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
-            </div>
-          </form>
-        </div>
+      <div class="card-body">
+        <p>Generate files with the given parameters</p>
+        <!-- Форма для генерации файлов -->
+        <form action="/generate_file" method="POST" enctype="multipart/form-data" id="form4">
+          <div class="form-group">
+            <input type="text" class="form-control" name="filename" id="filename" placeholder="File name">
+            <input type="text" class="form-control" name="size" id="size" placeholder="File size (KB)">
+            <input type="text" class="form-control" name="extension" id="extension" placeholder="File extension">
+            <input type="number" class="form-control" name="num_files" id="num_files" placeholder="Number of files"><br />
+            <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton4">Submit</button>
+          </div>
+        </form>
       </div>
     </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">🤏 JSON parser</h4>
+      </div>
+      <div class="card-body">
+        <p>Read JSON data from a file and extract specific fields values</p>
+        <!-- Форма для парсинга JSON -->
+        <form action="/parse_json" method="POST" enctype="multipart/form-data" id="form5">
+          <div class="form-group">
+            <input type="text" class="form-control" name="array_name" id="array_name" placeholder="Array name"><br />
+            <input type="text" class="form-control" name="cnvrt" id="cnvrt" placeholder="Comma separated list of JSON keys"><br />
+            <input type="file" class="form-control-file" name="file" id="file"><br />
+            <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton5">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">🗺️ Courier route generator</h4>
+      </div>
+      <div class="card-body">
+        <p>Generate an image of the courier's route on the map</p>
+        <!-- Форма для генерации маршрута курьера на карте -->
+        <form action="/generate_courier_route" method="POST" enctype="multipart/form-data" id="form6">
+          <div class="form-group">
+            <textarea name="coordinates" class="form-control" id="coordinates" cols="30" rows="5" placeholder="Enter coordinates in the format [(55.805674,37.594479), ..., ...]"></textarea><br />
+            <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton6">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">📑 PDF text extractor</h4>
+      </div>
+      <div class="card-body">
+        <p>Extract text from PDFs</p>
+        <!-- Форма для извлечения текста из PDF-файлов -->
+        <form action="/extract_text_from_pdf" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="file" class="form-control-file" name="pdf-file" id="pdf-file"><br />
+            <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">🔍 Text Similarity tool</h4>
+      </div>
+      <div class="card-body">
+        <p>Сompute the similarity score between two pieces of text</p>
+        <!-- Форма для вычисления похожести текстов -->
+        <form action="/compute_text_similarity" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <textarea name="first_input_text" class="form-control" id="first_input_text" cols="30" rows="1" maxlength="5000" placeholder="First input text." required></textarea><br />
+            <textarea name="second_input_text" class="form-control" id="second_input_text" cols="30" rows="1" maxlength="5000" placeholder="Second input text." required></textarea><br />
+            <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">🗞️ Random text generator</h4>
+      </div>
+      <div class="card-body">
+        <p>Generate random text</p>
+        <!-- Форма для генерации рандомного текста -->
+        <form action="/generate_random_text" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <div class="form-check">
+              <label class="form-check-label">Select number of characters:</label><br />
+              <input type="radio" name="qty_chars" id="qtyCharsRadio1" value="100" checked> 100
+              <input type="radio" name="qty_chars" id="qtyCharsRadio2" value="200"> 200
+              <input type="radio" name="qty_chars" id="qtyCharsRadio3" value="300"> 300
+              <br /><br />
+            </div>
+            <div class="form-check">
+              <label class="form-check-label" for="random_length">
+                <input class="form-check-input" type="checkbox" name="random_length" id="random_length">
+                  Generate random length text
+              </label>
+              <br /><br />
+            </div>
+            <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
     
 {% endblock %}

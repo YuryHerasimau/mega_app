@@ -2,22 +2,36 @@ import random
 import string
 
 
-def generate_password() -> str:
+def generate_password(password_length: str) -> str:
     """
-    Generate password from random lowercase letters and digits
+    Generate a random password of a specified length using letters and digits.
+
+    Parameters:
+    - password_length (int): The length of the password to generate.
+
+    Returns:
+    - password (str): The randomly generated password.
     """
     
     alphabet = string.ascii_letters + string.digits
-    return ''.join(random.choice(alphabet) for i in range(10))
+    password = ''.join(random.choice(alphabet) for i in range(password_length))
+    return password
 
 
-def multiple(number: int) -> list:
+def multiple(number_of_passwords: int, password_length: str, username_base: str) -> list:
     """
-    Generate a pair of login and password based on the input number
+    Generate multiple credentials consisting of a username base and a random password.
+
+    Parameters:
+    - number_of_passwords (int): The number of credentials to generate.
+    - password_length (int): The length of each password.
+    - username_base (str): The base username to use in the credentials.
+
+    Returns:
+    - list: A list of credentials in the format 'username_base{n}/password'.
     """
     
-    username_base = 'user'
     credentials = []
-    for i in range(number):
-        credentials.append(f"{username_base}{i}/{generate_password()}")
+    for n in range(number_of_passwords):
+        credentials.append(f"{username_base}{n}/{generate_password(password_length)}")
     return credentials

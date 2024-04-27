@@ -5,7 +5,7 @@ import requests
 from requests.exceptions import HTTPError
 from typing import List, Union, Dict
 from utils.path_generation import create_file_path, create_file_name
-from config import apikey
+from config import YANDEX_API_KEY
 
 
 def process_coordinates(coordinates: List[tuple]) -> List[str]:
@@ -45,7 +45,7 @@ def get_map(coordinates: List[tuple]) -> bytes:
                 "pt": f"{coordinates_list[0]},pm2am~{coordinates_list[-1]},pm2bm",
                 "pl": ",".join(coordinates_list),
                 # API key for accessing the Yandex Static API mapping service
-                "apikey": apikey,
+                "apikey": YANDEX_API_KEY,
             }
             response = requests.get(base_url, params=parameters)
             response.raise_for_status()
@@ -59,6 +59,4 @@ def get_map(coordinates: List[tuple]) -> bytes:
 
         except HTTPError as ex:
             raise SystemExit(ex)
-        except Exception as e:
-            print(f"An error occurred while processing the request: {e}")
     

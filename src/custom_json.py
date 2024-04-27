@@ -1,13 +1,13 @@
 import json
 
 
-def read(file_name: str, fields_list: list) -> list:
+def read(file_name: str, array_name: str, fields_list: list) -> list:
     """
     Read JSON data from a file and extract specific fields for each object
     """
 
     with open(file_name, 'r', encoding='utf-8') as json_file:
-        json_data = json.load(json_file)['couriers']
+        json_data = json.load(json_file)[array_name]
     
     result = []
     for obj in json_data:

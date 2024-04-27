@@ -1,40 +1,31 @@
-import json
 from faker import Faker
-from faker.providers import internet, credit_card
+from faker.providers.date_time import Provider
 
 
-def generate(data_type: str) -> str | list:
+def generate(data_type: str, locale: str) -> list:
     """
     Generate fake data based on the specified data_type
     """
     
-    fake = Faker()
+    fake = Faker(locale)
+    data_types = {
+        'name': fake.name,
+        'phone_number': fake.phone_number,
+        'address': fake.address,
+        'email': fake.email,
+        'country': fake.country,
+        'city': fake.city,
+        'text': fake.text,
+        'ipv4': fake.ipv4_private,
+        'user_agent': fake.chrome,
+        'company': fake.company,
+        'credit_card': fake.credit_card_full,
+        'geo': fake.location_on_land
+    }
+    qty = 10
 
-    if data_type == 'name':
-        return fake.name()
-
-    if data_type == 'address':
-        return fake.address() #.split('\n')
-
-    if data_type == 'text':
-        return fake.text()
-
-    if data_type == 'ipv4':
-        fake.add_provider(internet)
-        ip_list = []
-        for _ in range(5):
-            ip_list.append(fake.ipv4_private())
-        return ip_list
-
-    if data_type == 'user_agent':
-        user_agents_list = []
-        for _ in range(5):
-            user_agents_list.append(fake.chrome())
-        return user_agents_list
-
-    if data_type == 'credit_card':
-        return fake.credit_card_full() #.split('\n')
-
-    if data_type == 'geo':
-        geo = fake.location_on_land()
-        return json.dumps(geo)
+    if data_type in data_types:
+        fake_method = data_types[data_type]
+        return [fake_method() for _ in range(qty)]
+    else:
+        return 'Invalid data_type'

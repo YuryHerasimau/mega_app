@@ -5,6 +5,16 @@ BASE_DIR = "output"
 
 
 def create_file_path(module_name: str) -> str:
+    """
+    Create a file path based on the provided module name.
+
+    Args:
+    - module_name (str): The name of the module used to create the file path.
+
+    Returns:
+    - str: The created file path.
+    """
+    
     if not os.path.exists(BASE_DIR):
         os.makedirs(BASE_DIR)
 

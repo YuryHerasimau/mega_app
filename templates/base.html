@@ -19,17 +19,25 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-            <h1 class="display-4">🕵️‍♂️ QA Mega App 🐛 👾</h1>
-            <p class="lead">Try this tool that helps testers in their daily work.</p>
+    {% include "components/navbar.html" %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include "components/sidebar.html" %}
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                {% include "components/ticker.html" %}
+                {% include "components/heading_title.html" %}
+                <div class="container">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </main>
         </div>
-        {% block content %}
-        {% endblock content %}
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/formValidation.js') }}"></script>
 </body>
 </html>
