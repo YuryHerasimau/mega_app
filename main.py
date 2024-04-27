@@ -11,7 +11,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html", show_ticker=ticker.show_ticker, show_news=news.show_news)
+    return render_template("index.html", show_ticker=ticker.show_ticker())
+
+
+@app.route('/get_news', methods=['POST'])
+def get_news():
+    return render_template('/components/news_list.html', show_news=news.show_news())
 
 
 @app.route('/generate_credentials', methods=['POST'])
