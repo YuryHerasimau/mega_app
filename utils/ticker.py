@@ -1,4 +1,5 @@
 import requests
+from requests.exceptions import HTTPError
 import psutil
 from plyer import notification
 from time import sleep
@@ -9,7 +10,7 @@ from config import OPENWEATHER_API_KEY, CITY
 def get_date():
     """
     Get the current date and format it.
-    
+
     Returns:
     - str: The formatted date.
     """
@@ -28,13 +29,20 @@ def get_weather(city: str) -> str:
     - str: A formatted string containing the weather information for the specified city.
     """
 
-    response = requests.get(f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHER_API_KEY}&units=metric')
-    data = response.json()
-    description = data['weather'][0]['description']
-    icon = get_weather_icon(description)
-    temperature = data['main']['temp']
-    formatted_weather = f"{city}: {icon} {temperature}°C"
-    return formatted_weather
+    try:
+        response = requests.get(
+            f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHER_API_KEY}&units=metric"
+        )
+        data = response.json()
+        if response.status_code == 200:
+            description = data["weather"][0]["description"]
+            icon = get_weather_icon(description)
+            temperature = data["main"]["temp"]
+            formatted_weather = f"{city}: {icon} {temperature}°C"
+            return formatted_weather
+    except Exception as ex:
+        print(f"Request Error: {ex}")
+        return None
 
 
 def get_weather_icon(description: str) -> str:
@@ -48,17 +56,17 @@ def get_weather_icon(description: str) -> str:
     - str: The corresponding weather icon based on the description.
     """
 
-    if 'cloud' in description:
+    if "cloud" in description:
         return "☁️"
-    elif 'sun' and 'cloud' in description:
+    elif "sun" and "cloud" in description:
         return "⛅"
-    elif 'rain' in description:
+    elif "rain" in description:
         return "🌧️"
-    elif 'snow' in description:
+    elif "snow" in description:
         return "🌨️"
-    elif 'lightning' in description:
+    elif "lightning" in description:
         return "🌩️"
-    elif 'storm' in description:
+    elif "storm" in description:
         return "⛈️"
     else:
         return "☀️"
@@ -72,12 +80,17 @@ def get_currency_rates() -> str:
     - str: A formatted string containing the currency exchange rates.
     """
 
-    response = requests.get('https://api.exchangerate-api.com/v4/latest/USD')
-    data = response.json()
-    usd_rate = data['rates']['BYN'] # Курс доллара к белорусскому рублю
-    rub_rate = data['rates']['RUB'] # Курс доллара к российскому рублю
-    formatted_rates = f"USD/BYN {usd_rate}, USD/RUB {rub_rate}"
-    return formatted_rates
+    try:
+        response = requests.get("https://api.exchangerate-api.com/v4/latest/USD")
+        data = response.json()
+        if response.status_code == 200:
+            usd_rate = data["rates"]["BYN"]  # Курс доллара к белорусскому рублю
+            rub_rate = data["rates"]["RUB"]  # Курс доллара к российскому рублю
+            formatted_rates = f"USD/BYN {usd_rate}, USD/RUB {rub_rate}"
+            return formatted_rates
+    except Exception as ex:
+        print(f"Request Error: {ex}")
+        return None
 
 
 def get_crypto_rates() -> str:
@@ -89,12 +102,14 @@ def get_crypto_rates() -> str:
     """
 
     try:
-        response = requests.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,litecoin&vs_currencies=usd')
+        response = requests.get(
+            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,litecoin&vs_currencies=usd"
+        )
         data = response.json()
         if response.status_code == 200:
-            btc_rate = data['bitcoin']['usd']
-            eth_rate = data['ethereum']['usd']
-            ltc_rate = data['litecoin']['usd']
+            btc_rate = data["bitcoin"]["usd"]
+            eth_rate = data["ethereum"]["usd"]
+            ltc_rate = data["litecoin"]["usd"]
             return f"BTC: {btc_rate}, ETH: {eth_rate}, LTC: {ltc_rate}"
     except Exception as ex:
         print(f"Request Error: {ex}")
@@ -133,9 +148,9 @@ def check_battery_usage():
         life = battery.percent
         if life < battery_threshold:
             notification.notify(
-                title = "Battery Low",
-                message = "🐱‍👤 I hacked your PC!\nСonnect to power source IMMEDIATELY!",
-                timeout = 10
+                title="Battery Low",
+                message="🐱‍👤 I hacked your PC!\nСonnect to power source IMMEDIATELY!",
+                timeout=10,
             )
             return f"Alarm! Battery percentage: {life}%"
         else:
@@ -150,15 +165,16 @@ def show_ticker() -> str:
     Returns:
     - str: A formatted string containing the ticker information.
     """
-    
+
     current_date = get_date()
     weather = get_weather(CITY)
     currency_rates = get_currency_rates()
     crypto_rates = get_crypto_rates()
-
-    if crypto_rates is None:
-        crypto_rates = ""
-
     memory_cpu_usage = check_memory_and_cpu_usage()
     battery_usage = check_battery_usage()
+
+    weather = "" if weather is None else weather
+    currency_rates = "" if currency_rates is None else currency_rates
+    crypto_rates = "" if crypto_rates is None else crypto_rates
+
     return f"📅 {current_date} | 🌡️ {weather} | 💲 {currency_rates} | 💹 {crypto_rates} | 🐱‍💻 {memory_cpu_usage} | 🔋 {battery_usage}"

@@ -1,4 +1,5 @@
 # QA app by group_qa_the_best
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## Description
 A web application to assist QA engineers in their daily work.

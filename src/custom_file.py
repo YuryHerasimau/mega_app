@@ -23,5 +23,5 @@ def generate(filename: str, size_in_kb: int, file_extension: str, num_files: int
         file_name = f"{filename}_{i}.{file_extension}"
         file_path = create_file_name(path=path, file_name=file_name)
 
-        with open(file_path, 'wb') as file:
-            file.write(b'1' * file_size_bytes)
+        with open(file_path, "wb") as file:
+            file.write(b"1" * file_size_bytes)

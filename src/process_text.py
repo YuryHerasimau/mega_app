@@ -1,4 +1,5 @@
 import requests
+from requests.exceptions import HTTPError
 from config import API_NINJAS_KEY
 
 
@@ -14,11 +15,17 @@ def compute_similarity(first_input_text: str, second_input_text: str) -> dict:
     - dict: A dictionary containing the similarity score between the two texts.
     """
 
-    body = {'text_1': first_input_text, 'text_2': second_input_text}
-    api_url = 'https://api.api-ninjas.com/v1/textsimilarity'
-    response = requests.post(api_url, headers={'X-Api-Key': API_NINJAS_KEY}, json=body)
-    if response.status_code == requests.codes.ok:
-        return response.json()
-    else:
-        print("Error:", response.status_code, response.text)
-        return None
+    body = {"text_1": first_input_text, "text_2": second_input_text}
+    try:
+        api_url = "https://api.api-ninjas.com/v1/textsimilarity"
+        response = requests.post(
+            api_url, headers={"X-Api-Key": API_NINJAS_KEY}, json=body
+        )
+        if response.status_code == requests.codes.ok:
+            return response.json()
+        else:
+            print("Error:", response.status_code, response.text)
+            return None
+    except HTTPError as ex:
+        print(f"Error: {ex}")
+        raise SystemExit(ex)

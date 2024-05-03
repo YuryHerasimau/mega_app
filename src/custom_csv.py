@@ -7,7 +7,7 @@ from utils.path_generation import create_file_path, create_file_name
 
 ID = uuid.uuid4()
 DATE = datetime.today().date()
-ACTIONS = ['parse', 'filter', 'sort']
+ACTIONS = ["parse", "filter", "sort"]
 action = random.choice(ACTIONS)
 
 
@@ -36,9 +36,9 @@ def generate(data: str, action: str) -> None:
     file_name = f"{ID}_{DATE}_{action}.csv"
     file_path = create_file_name(path=path, file_name=file_name)
 
-    with open(file_path, 'w', newline='', encoding='utf-8') as csv_file:
-        headers = ['id', 'date', 'action', 'data']
+    with open(file_path, "w", newline="", encoding="utf-8") as csv_file:
+        headers = ["id", "date", "action", "data"]
         writer = csv.DictWriter(csv_file, headers)
-        config_data = {'id': ID, 'date': DATE, 'action': action, 'data': data}
+        config_data = {"id": ID, "date": DATE, "action": action, "data": data}
         writer.writeheader()
         writer.writerow(config_data)

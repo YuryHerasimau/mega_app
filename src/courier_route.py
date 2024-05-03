@@ -14,7 +14,7 @@ def process_coordinates(coordinates: List[tuple]) -> List[str]:
     Args:
     - coordinates (List[tuple]): List of coordinates in the format (latitude,longitude).
     E.g. [(55.805674,37.594479),(55.805674,37.594479), ...]
-    
+
     Returns:
     - List[str]: A list of inverted coordinates in the format 'latitude,longitude'.
     E.g. ['37.594479,55.805674', '37.594479,55.805674', ...]
@@ -59,4 +59,3 @@ def get_map(coordinates: List[tuple]) -> bytes:
 
         except HTTPError as ex:
             raise SystemExit(ex)
-    
