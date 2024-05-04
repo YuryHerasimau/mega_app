@@ -1,7 +1,7 @@
 <ul class="nav flex-column" id="newsList">
     {% for news_title, news_url in show_news %}
         <li class="nav-item">
-            <a class="nav-link" href="{{ news_url }}">{{ news_title }}</a>
+            <a class="nav-link" href="{{ news_url }}" target="_blank">{{ news_title }}</a>
         </li>
     {% endfor %}
 </ul>

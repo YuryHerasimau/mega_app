@@ -8,13 +8,31 @@
                 </h6>
             </dt>
             <dd class="col-sm-9">
-                <a href="{{ url_for('get_wordcloud_image') }}" target="_blank" id="image-link">
-                    <button class="btn btn-outline-info btn-lg">Get</button>
+                <a data-toggle="modal" href="#myModal" id="image-link">
+                    <button class="btn btn-outline-info btn-lg" data-toggle="modal" data-target="#myModal">Get!</button>
                 </a>
             </dd>
-            <!-- <a href="{{ url_for('get_wordcloud_image') }}" target="_blank" id="image-link">
-                <img src="{{ url_for('get_wordcloud_image') }}" class="img-thumbnail" alt="WordCloud Image">
-            </a> -->
+        </div>
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">WordCloud Image</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <img src="{{ url_for('get_wordcloud_image') }}" class="img-fluid" alt="WordCloud Image">
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <br>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
         <div class="row">
