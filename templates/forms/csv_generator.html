@@ -1,0 +1,14 @@
+<p>Generate a CSV file based on the data and action</p>
+<!-- Форма для генерации csv файла -->
+<form action="/generate_csv" method="POST" enctype="multipart/form-data" id="form2">
+    <div class="form-group">
+    <input type="text" class="form-control" id="csv_data" name="csv_data" placeholder="Text data">
+    <select name="actions" class="form-control" id="actions">
+        <option selected value="">--Choose an action--</option>
+        <option value="parse">parse</option>
+        <option value="filter">filter</option>
+        <option value="sort">sort</option>
+    </select><br />
+    <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton2" disabled>Submit</button>
+    </div>
+</form>

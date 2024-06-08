@@ -15,7 +15,7 @@ def generate(qty_chars: int, random_length: bool) -> str:
     """
 
     if random_length:
-        qty_chars = random.randint(5, 5000)  # Генерация случайного числа символов
+        qty_chars = random.randint(5, 5000)
     letters = string.ascii_letters + string.digits + string.punctuation
     random_text = "".join(random.choice(letters) for i in range(qty_chars))
     # while len(random_text) < qty_chars:

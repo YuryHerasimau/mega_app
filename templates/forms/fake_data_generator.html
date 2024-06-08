@@ -1,0 +1,31 @@
+<p>Generate synthetic data</p>
+<br>
+<!-- Форма для генерации фейковых данных -->
+<form action="/generate_fake_data" method="POST" enctype="multipart/form-data" id="form3">
+    <div class="form-group">
+    <div class="form-check">
+        <label class="form-check-label">Select locale:</label><br />
+        <input type="radio" name="locale" id="localeRadio1" value="en_US" checked> USA
+        <input type="radio" name="locale" id="localeRadio2" value="de_DE"> German
+        <input type="radio" name="locale" id="localeRadio3" value="ru_RU"> Russian
+        <input type="radio" name="locale" id="localeRadio4" value="ja"> Japanese
+        <br /><br />
+    </div>
+    <select name="data_type" class="form-control" id="data_type">
+        <option selected value="">--Choose a data type--</option>
+        <option value="name">name</option>
+        <option value="phone_number">phone number</option>
+        <option value="address">address</option>
+        <option value="email">email</option>
+        <option value="country">country</option>
+        <option value="city">city</option>
+        <option value="text">text</option>
+        <option value="ipv4">ipv4</option>
+        <option value="user_agent">user agent</option>
+        <option value="company">company</option>
+        <option value="credit_card">credit card</option>
+        <option value="geo">geolocation</option>
+    </select><br />
+    <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton3" disabled>Submit</button>
+    </div>
+</form>

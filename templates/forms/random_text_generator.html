@@ -1,0 +1,22 @@
+<p>Generate random text</p>
+<br>
+<!-- Форма для генерации рандомного текста -->
+<form action="/generate_random_text" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+    <div class="form-check">
+        <label class="form-check-label">Select number of characters:</label><br />
+        <input type="radio" name="qty_chars" id="qtyCharsRadio1" value="100" checked> 100
+        <input type="radio" name="qty_chars" id="qtyCharsRadio2" value="200"> 200
+        <input type="radio" name="qty_chars" id="qtyCharsRadio3" value="300"> 300
+        <br /><br />
+    </div>
+    <div class="form-check">
+        <label class="form-check-label" for="random_length">
+        <input class="form-check-input" type="checkbox" name="random_length" id="random_length">
+            Generate random length text
+        </label>
+        <br /><br />
+    </div>
+    <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+    </div>
+</form>

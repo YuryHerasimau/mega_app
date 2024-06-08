@@ -1,0 +1,11 @@
+<p>Create or update a CSV file</p>
+<br>
+<!-- Форма для генерации csv файла -->
+<form action="/create_or_update_csv" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="text" class="form-control" id="names" name="names" placeholder="Field Names (comma-separated)">
+        <input type="text" class="form-control" id="data" name="data" placeholder="Data (comma-separated)">
+        <input type="text" class="form-control" id="csv_filename" name="csv_filename" placeholder="CSV file name"><br />
+        <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton">Submit</button>
+    </div>
+</form>

@@ -14,3 +14,6 @@ pandas==2.2.2
 tqdm==4.66.2
 wordcloud==1.9.3
 openpyxl==3.1.2
+beautifulsoup4==4.12.3
+selenium==4.20.0
+lxml==5.2.1

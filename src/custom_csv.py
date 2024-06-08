@@ -1,3 +1,4 @@
+from typing import List
 import random
 from datetime import datetime
 import uuid
@@ -9,6 +10,8 @@ ID = uuid.uuid4()
 DATE = datetime.today().date()
 ACTIONS = ["parse", "filter", "sort"]
 action = random.choice(ACTIONS)
+
+path = create_file_path(module_name=__name__)
 
 
 def generate(data: str, action: str) -> None:
@@ -32,7 +35,6 @@ def generate(data: str, action: str) -> None:
     generate(data="Sample data", action="filter")
     """
 
-    path = create_file_path(module_name=__name__)
     file_name = f"{ID}_{DATE}_{action}.csv"
     file_path = create_file_name(path=path, file_name=file_name)
 
@@ -42,3 +44,22 @@ def generate(data: str, action: str) -> None:
         config_data = {"id": ID, "date": DATE, "action": action, "data": data}
         writer.writeheader()
         writer.writerow(config_data)
+
+
+def create_or_update_csv(data: List[str], file_name: str, fieldnames: List[str]) -> None:
+    """
+    Create or update a CSV file with the provided data.
+
+    Parameters:
+    - data: A list of strings containing the data to be written to the CSV file.
+    - file_name: The name of the CSV file to be created or updated.
+    - fieldnames: A list of strings representing the field names in the CSV file.
+    """
+    
+    file_name = f"{file_name}.csv"
+    file_path = create_file_name(path=path, file_name=file_name)
+
+    with open(file_path, "a", newline="", encoding="utf-8") as csvfile:
+        csv_writer = csv.DictWriter(csvfile, fieldnames)
+        csv_writer.writeheader()
+        csv_writer.writerow(dict(zip(fieldnames, data)))

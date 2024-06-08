@@ -13,16 +13,39 @@ from src import (
     random_text,
     process_text,
     hh,
+    links_checker,
+    img_scraper
 )
 from utils import news, ticker, mini_snakes
-
+from utils.url_validation import is_valid_url
 
 app = Flask(__name__)
+MAIN_URL = "<a href='/'>main</a>"
 
 
 @app.route("/")
 def index():
-    return render_template("index.html", show_ticker=ticker.show_ticker())
+    show_forms = {
+        'password': True, # Показывать форму для генерации паролей
+        'csv': True, # Показывать форму для генерации CSV
+        'text': True,
+        'file': True,
+    }
+    return render_template("index.html", show_ticker=ticker.show_ticker(), show_forms=show_forms)
+
+
+@app.route("/filter_forms/<category>")
+def filter_forms(category):
+    show_forms = {
+        'password': False,
+        'csv': False,
+        'text': False,
+        'file': False,
+    }
+    # Добавьте другие категории и формы по мере необходимости
+    if category in show_forms:
+        show_forms[category] = True
+    return render_template("index.html", show_forms=show_forms)
 
 
 @app.route("/wordcloud_image")
@@ -84,11 +107,27 @@ def generate_csv():
         action = request.form["actions"]
         if data and action:
             custom_csv.generate(data=data, action=action)
-            return 'CSV file generated, return to the <a href="/">main</a> page'
+            return f'CSV file generated, return to the {MAIN_URL} page'
         else:
             return jsonify({"error": "Invalid input. Please enter text data."}), 400
     except Exception:
         return jsonify({"error": "Something went wrong. Try again."}), 400
+
+
+@app.route("/create_or_update_csv", methods=["POST"])
+def create_or_update_csv():
+    try:
+        fieldnames = request.form["names"].split(",")
+        data = request.form["data"].split(",")
+        csv_filename = request.form["csv_filename"]
+        if data and csv_filename and fieldnames:
+            custom_csv.create_or_update_csv(data=data, file_name=csv_filename, fieldnames=fieldnames)
+            return f'CSV file created/updated successfully, return to the {MAIN_URL} page'
+        else:
+            return jsonify({"error": "Invalid input. Please enter text data."}), 400
+    except Exception as ex:
+        print(ex)
+        return jsonify({"error": "Failed to create/update CSV file"}), 400
 
 
 @app.route("/generate_fake_data", methods=["POST"])
@@ -136,7 +175,7 @@ def generate_file():
         file_extension=file_extension,
         num_files=num_files,
     )
-    return f'{num_files} files generated, return to the <a href="/">main</a> page'
+    return f'{num_files} files generated, return to the {MAIN_URL} page'
 
 
 @app.route("/generate_courier_route", methods=["POST"])
@@ -200,6 +239,29 @@ def generate_text():
         return generated_text
     except Exception:
         return jsonify({"error": "Failed to generate text."}), 400
+
+
+@app.route("/check_all_links", methods=["POST"])
+def check_links():
+    url = request.form['url']
+    if not is_valid_url(url):
+        return jsonify({"error": "Invalid URL. Please provide a valid URL."}), 400
+    try:
+        return links_checker.parse_links(url=url)
+    except Exception:
+        return jsonify({"error": "Failed to check links."}), 400
+
+
+@app.route("/scrape_all_images", methods=["POST"])
+def download_images():
+    url = request.form['url']
+    if not is_valid_url(url):
+        return jsonify({"error": "Invalid URL. Please provide a valid URL."}), 400
+    try:
+        img_scraper.parse(url=url)
+        return f'All images downloaded, return to the {MAIN_URL} page'
+    except Exception:
+        return jsonify({"error": "Failed to download images."}), 400
 
 
 @app.route("/play_snake")

@@ -16,7 +16,7 @@ def process_coordinates(coordinates: List[tuple]) -> List[str]:
     E.g. [(55.805674,37.594479),(55.805674,37.594479), ...]
 
     Returns:
-    - List[str]: A list of inverted coordinates in the format 'latitude,longitude'.
+    - List[str]: A list of inverted coordinates in the format 'longitude,latitude'.
     E.g. ['37.594479,55.805674', '37.594479,55.805674', ...]
     """
 

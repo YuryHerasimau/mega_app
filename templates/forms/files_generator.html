@@ -1,0 +1,12 @@
+<p>Generate files with the given parameters</p>
+<br>
+<!-- Форма для генерации файлов -->
+<form action="/generate_file" method="POST" enctype="multipart/form-data" id="form4">
+    <div class="form-group">
+        <input type="text" class="form-control" name="filename" id="filename" placeholder="File name">
+        <input type="text" class="form-control" name="size" id="size" placeholder="File size (KB)">
+        <input type="text" class="form-control" name="extension" id="extension" placeholder="File extension">
+        <input type="number" class="form-control" name="num_files" id="num_files" placeholder="Number of files"><br />
+        <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton4">Submit</button>
+    </div>
+</form>
