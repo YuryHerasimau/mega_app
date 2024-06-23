@@ -1,5 +1,6 @@
 # QA app by group_qa_the_best
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Join telegram chat https://t.me/group_qa_the_best](https://img.shields.io/badge/chat-telegram-blue)](https://t.me/group_qa_the_best)
 
 ## Description
 A web application to assist QA engineers in their daily work.

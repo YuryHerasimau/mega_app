@@ -10,6 +10,7 @@ from utils.path_generation import create_file_path, create_file_name
 
 path = create_file_path(module_name=__name__)
 
+
 def get_url(url: str) -> str:
     """
     Get the HTML content of the specified URL using a headless Chrome browser.
@@ -19,10 +20,10 @@ def get_url(url: str) -> str:
     """
 
     options = Options()
-    options.add_argument('--headless')
+    options.add_argument("--headless")
     driver = webdriver.Chrome(options=options)
     driver.get(url)
-    time.sleep(3) 
+    time.sleep(3)
     print("Loading...")
     # get the HTML code of the page after it has loaded
     res = driver.execute_script("return document.documentElement.outerHTML")
@@ -42,7 +43,7 @@ def get_img_links(res: str) -> List[str]:
     return imglinks
 
 
-def download_img(img_link: str, start_index: int=1) -> None:
+def download_img(img_link: str, start_index: int = 1) -> None:
     """
     Download an image from the given image link and save it to a file.
 
@@ -69,7 +70,7 @@ def download_img(img_link: str, start_index: int=1) -> None:
         pass
 
 
-def parse(url: str, start_index: int=1) -> None:
+def parse(url: str, start_index: int = 1) -> None:
     """
     Parse the given URL to extract image links and download the images.
 

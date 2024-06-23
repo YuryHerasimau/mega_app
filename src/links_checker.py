@@ -5,7 +5,7 @@ from pprint import pprint
 
 def check_link_validity(url):
     try:
-        response = requests.get(url) # head
+        response = requests.get(url)  # head
         return response.status_code == 200
     except requests.exceptions.RequestException:
         return False

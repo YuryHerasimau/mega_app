@@ -55,7 +55,7 @@ def create_or_update_csv(data: List[str], file_name: str, fieldnames: List[str])
     - file_name: The name of the CSV file to be created or updated.
     - fieldnames: A list of strings representing the field names in the CSV file.
     """
-    
+
     file_name = f"{file_name}.csv"
     file_path = create_file_name(path=path, file_name=file_name)
 

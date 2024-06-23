@@ -6,7 +6,7 @@ def generate(data_type: str, locale: str) -> list:
     """
     Generate fake data based on the specified data_type
     """
-    
+
     fake = Faker(locale)
     data_types = {
         "name": fake.name,

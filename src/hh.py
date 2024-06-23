@@ -24,7 +24,7 @@ def dump_json(obj: dict, filename: str) -> None:
     Returns:
     - None
     """
-    
+
     with open(filename, "w", encoding="UTF-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=4)
 
@@ -133,7 +133,7 @@ def get_wordcloud_image(text: str) -> str:
     Returns:
     - str: The file path of the generated word cloud image.
     """
-    
+
     vacancies = get_vacancies(
         text=text, experience=None, employment=None, schedule=None
     )

@@ -39,5 +39,5 @@ def create_file_name(path: str, file_name: str) -> str:
     Returns:
     - str: The complete file path after joining the directory path and file name
     """
-    
+
     return os.path.join(path, file_name)
