@@ -18,17 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     // form3
     const form3 = document.getElementById('form3');
-    const radios3 = document.getElementsByName('locale');
-    const dropDown3 = document.getElementById('data_type');
+    const dropDown3_locale = document.getElementsByName('locale');
+    const dropDown3_data_type = document.getElementById('data_type');
     const submitButton3 = document.getElementById('submitButton3');
     form3.addEventListener('input', function() {
-        const isFormFilled = [...radios3].some(radio =>
-            radio.checked) && dropDown3.value !== '';
-        submitButton3.disabled = !isFormFilled; 
-    });
-    form3.addEventListener('change', function() {
-        const isFormFilled = [...radios3].some(radio =>
-            radio.checked) && dropDown3.value !== '';
-        submitButton3.disabled = !isFormFilled;
+        submitButton3.disabled = !dropDown3_locale[0].value || !dropDown3_data_type.value;
     });
 });

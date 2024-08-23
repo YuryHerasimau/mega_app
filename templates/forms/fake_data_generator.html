@@ -3,29 +3,64 @@
 <!-- Форма для генерации фейковых данных -->
 <form action="/generate_fake_data" method="POST" enctype="multipart/form-data" id="form3">
     <div class="form-group">
-    <div class="form-check">
-        <label class="form-check-label">Select locale:</label><br />
-        <input type="radio" name="locale" id="localeRadio1" value="en_US" checked> USA
-        <input type="radio" name="locale" id="localeRadio2" value="de_DE"> German
-        <input type="radio" name="locale" id="localeRadio3" value="ru_RU"> Russian
-        <input type="radio" name="locale" id="localeRadio4" value="ja"> Japanese
-        <br /><br />
-    </div>
-    <select name="data_type" class="form-control" id="data_type">
-        <option selected value="">--Choose a data type--</option>
-        <option value="name">name</option>
-        <option value="phone_number">phone number</option>
-        <option value="address">address</option>
-        <option value="email">email</option>
-        <option value="country">country</option>
-        <option value="city">city</option>
-        <option value="text">text</option>
-        <option value="ipv4">ipv4</option>
-        <option value="user_agent">user agent</option>
-        <option value="company">company</option>
-        <option value="credit_card">credit card</option>
-        <option value="geo">geolocation</option>
-    </select><br />
-    <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton3" disabled>Submit</button>
+        <select name="locale" class="form-control" id="locale">
+            <option selected value="">--Choose locale--</option>
+            <option value="ar">Arabic</option>
+            <option value="bg_BG">Bulgarian (Bulgaria)</option>
+            <option value="cs_CZ">Czech (Czech Republic)</option>
+            <option value="da_DK">Danish (Denmark)</option>
+            <option value="de_DE">German (Germany)</option>
+            <option value="el_GR">Greek (Greece)</option>
+            <option value="en_US">English (United States)</option>
+            <option value="es_ES">Spanish (Spain)</option>
+            <option value="fi_FI">Finnish (Finland)</option>
+            <option value="fr_FR">French (France)</option>
+            <option value="ga_IE">Irish (Ireland)</option>
+            <option value="hi_IN">Hindi (India)</option>
+            <option value="hr_HR">Croatian (Croatia)</option>
+            <option value="hu_HU">Hungarian (Hungary)</option>
+            <option value="hy_AM">Armenian (Armenia) </option>
+            <option value="id_ID">Indonesian (Indonesia)</option>
+            <option value="it_IT">Italian (Italy)</option>
+            <option value="iw_IL">Hebrew (Israel)</option>
+            <option value="ja_JP">Japanese (Japan)</option>
+            <option value="ka_GE">Georgian (Georgia)</option>
+            <option value="ko_KR">Korean (South Korea)</option>
+            <option value="lt_LT">Lithuanian (Lithuania)</option>
+            <option value="lb_LU">Luxembourgish (Luxembourg)</option>
+            <option value="lv_LV">Latvian (Latvia)</option>
+            <option value="nl_NL">Dutch (Netherlands)</option>
+            <option value="no_NO">Norwegian (Norway)</option>
+            <option value="pl_PL">Polish (Poland)</option>
+            <option value="pt_PT">Portuguese (Portugal)</option>
+            <option value="ro_RO">Romanian (Romania)</option>
+            <option value="ru_RU">Russian</option>
+            <option value="sk_SK">Slovak (Slovakia)</option>
+            <option value="sl_SI">Slovenian (Slovenia)</option>
+            <option value="sq_AL">Albanian (Albania)</option>
+            <option value="th_TH">Thai (Thailand)</option>
+            <option value="tr_TR">Turkish (Turkey)</option>
+            <option value="uk_UA">Ukrainian (Ukraine)</option>
+            <option value="vi_VN">Vietnamese (Vietnam)</option>
+            <option value="zh_CN">Chinese - CHINA</option>
+            <option value="zh_TW">Chinese - TAIWAN</option>
+            <option value="zu_ZA">Zulu (South Africa)</option>
+            </select>
+        <select name="data_type" class="form-control" id="data_type">
+            <option selected value="">--Choose a data type--</option>
+            <option value="name">name</option>
+            <option value="phone_number">phone number</option>
+            <option value="address">address</option>
+            <option value="email">email</option>
+            <option value="country">country</option>
+            <option value="city">city</option>
+            <option value="text">text</option>
+            <option value="ipv4">ipv4</option>
+            <option value="user_agent">user agent</option>
+            <option value="company">company</option>
+            <option value="credit_card">credit card</option>
+            <option value="geo">geolocation</option>
+        </select><br />
+        <button type="submit" class="btn btn-lg btn-block btn-primary" id="submitButton3" disabled>Submit</button>
     </div>
 </form>
