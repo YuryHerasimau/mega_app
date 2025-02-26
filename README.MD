@@ -7,6 +7,12 @@
 A web application to assist QA engineers in their daily work.
 Postman test suite is included.
 
+Below is an example:
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img src="mega_app.png" width=1000 alt="main-screen" />
+</div>
+
 ## Getting started
 
 ### Installing 

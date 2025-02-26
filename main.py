@@ -15,6 +15,7 @@ from src import (
     hh,
     links_checker,
     img_scraper,
+    date_difference
 )
 from utils import news, ticker, mini_snakes
 from utils.url_validation import is_valid_url
@@ -277,6 +278,22 @@ def play_game():
     except Exception as ex:
         return "An error occurred while playing the game."
 
+
+@app.route("/calculate_date_difference", methods=["POST"])
+def get_date_difference():
+    dt_from = request.form["date_time_from"]
+    dt_to = request.form["date_time_to"]
+    result = date_difference.calculate_date_difference(date_time_from=dt_from, date_time_to=dt_to)
+    return f"General difference between {dt_from} and {dt_to} timestamps: {result}"
+
+
+@app.route("/subtract_days", methods=["POST"])
+def subtract_days_handler():
+    dt_to = request.form["date_time_to"]
+    days = int(request.form["days"])
+    inclusive = request.form["inclusive"] == "true"
+    result = date_difference.subtract_days(date_time_to=dt_to, days=days, inclusive=inclusive)
+    return f"Result of subtracting {days} days ({'inclusively' if inclusive == 'true' else 'exclusively'}) from {dt_to}: {result}"
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

@@ -1,0 +1,15 @@
+<p>Subtract X days from the entered date</p>
+<!-- Форма для вычитания искомого кол-ва дней из введеной даты -->
+<form action="/subtract_days" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="text" class="form-control" name="date_time_to" id="date_time_to" maxlength="30" placeholder="Date (YYYY-MM-DD): 2024-10-11" required></input><br />
+        <label for="days">Number of Days:</label>
+        <input type="number" class="form-control" name="days" id="days" min="1" required>
+        <label for="inclusive">Include End Date:</label>
+        <select class="form-control" name="inclusive" id="inclusive">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select><br />
+        <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+    </div>
+</form>

@@ -1,0 +1,9 @@
+<p>Сalculate the difference between two datetime objects</p>
+<!-- Форма для вычисления разницы между датами в формате ISO 8601 -->
+<form action="/calculate_date_difference" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="text" class="form-control" name="date_time_from" id="date_time_from" maxlength="30" placeholder="Start Date (ISO 8601): 2024-08-12T21:00:22Z" required></input>
+        <input type="text" class="form-control" name="date_time_to" id="date_time_to" maxlength="30" placeholder="End Date (ISO 8601): 2024-10-11T14:00:22Z" required></input><br />
+        <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+    </div>
+</form>
