@@ -1,0 +1,59 @@
+<p>Mock Requests with Selenium-Wire</p>
+<!-- Форма для мокирования запросов -->
+<form action="/mock_request" method="POST" enctype="multipart/form-data" >
+    <div class="form-group">
+        <input type="text" class="form-control" id="target_url" name="target_url" placeholder="Target URL" required>
+        <textarea id="mock_config" class="form-control" name="mock_config" placeholder="Mock Config (JSON)"></textarea>
+
+        <p>Or fill the fields below:</p>
+        <select id="method" name="method" class="form-control">
+            <option selected value="">--Choose method--</option>
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+        </select>
+
+        <select id="action" name="action" class="form-control">
+            <option selected value="">--Choose action--</option>
+            <option value="modify_url">Modify URL</option>
+            <option value="mock_response">Mock Response</option>
+        </select><br>
+
+        <!-- Поле request_url, которое будет скрыто по умолчанию -->
+        <div id="request_url_fields" style="display: none;">
+            <input type="text" class="form-control" id="request_url" name="request_url" placeholder="Request URL">
+        </div>
+
+        <div id="modify_url_fields">
+            <input type="text" class="form-control" id="from" name="from" placeholder="Old URL part">
+            <input type="text" class="form-control" id="to" name="to" placeholder="New URL part">
+        </div>
+
+        <div id="mock_response_fields">
+            <input type="number" class="form-control" id="status_code" name="status_code" placeholder="Status Code">
+            <textarea id="headers" class="form-control" name="headers" placeholder="Headers (JSON)">{"Content-Type": "application/json"}</textarea>
+            <textarea id="body" class="form-control" name="body" placeholder="Body (JSON):">{"status": "mocked response"}</textarea>
+        </div><br>
+
+        <button type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+    </div>
+</form>
+
+<script>
+    // Начальное скрытие полей
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("request_url_fields").style.display = "none";
+        document.getElementById("modify_url_fields").style.display = "none";
+        document.getElementById("mock_response_fields").style.display = "none";
+    });
+
+    // Показываем/скрываем поля в зависимости от выбранного действия
+    document.getElementById("action").addEventListener("change", function() {
+        const action = this.value;
+        document.getElementById("request_url_fields").style.display =
+            action === "modify_url" || action === "mock_response" ? "block" : "none";
+        document.getElementById("modify_url_fields").style.display =
+            action === "modify_url" ? "block" : "none";
+        document.getElementById("mock_response_fields").style.display =
+            action === "mock_response" ? "block" : "none";
+    });
+</script>

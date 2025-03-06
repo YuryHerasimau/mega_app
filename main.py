@@ -1,5 +1,7 @@
 import io
 import random
+import time
+import json
 from flask import Flask, request, jsonify, send_file, render_template
 from werkzeug.utils import secure_filename
 from src import (
@@ -15,7 +17,8 @@ from src import (
     hh,
     links_checker,
     img_scraper,
-    date_difference
+    date_difference,
+    mock_selenium
 )
 from utils import news, ticker, mini_snakes
 from utils.url_validation import is_valid_url
@@ -295,5 +298,61 @@ def subtract_days_handler():
     result = date_difference.subtract_days(date_time_to=dt_to, days=days, inclusive=inclusive)
     return f"Result of subtracting {days} days ({'inclusively' if inclusive == 'true' else 'exclusively'}) from {dt_to}: {result}"
 
+
+@app.route("/mock_request", methods=["POST"])
+def mock_request_handler():
+    if request.method == "POST":
+        target_url = request.form.get("target_url")
+        mock_config = request.form.get("mock_config")
+        print("mock_config from form", mock_config)
+
+        # Если mock_config передан как JSON-строка, парсим его
+        if mock_config:
+            try:
+                mock_configs = json.loads(mock_config)
+                print("mock_config from json", mock_configs)
+            except json.JSONDecodeError:
+                return jsonify({"error": "Invalid JSON in mock_config"}), 400
+        else:
+            # Если mock_config не передан, собираем его из отдельных полей
+            status_code = request.form.get("status_code")
+            status_code = int(status_code) if status_code else 200 # По умолчанию 200
+
+            mock_configs = [
+                {
+                    "request_url": request.form.get("request_url"),
+                    "method": request.form.get("method"),
+                    "action": request.form.get("action"),
+                    "modify_url": {
+                        "from": request.form.get("from"),
+                        "to": request.form.get("to")
+                    },
+                    "response": {
+                        "status_code": status_code,
+                        "headers": json.loads(request.form.get("headers")),
+                        "body": json.loads(request.form.get("body"))
+                    }
+                }
+            ]
+            print("mock_configs from form", mock_configs)
+
+        # Инициализация драйвера
+        driver = mock_selenium.init_driver()
+
+        try:
+            # Мокирование запроса
+            mock_selenium.mock_multiple_requests(driver, mock_configs)
+
+            # Открываем страницу
+            driver.get(target_url)
+
+            # Ждем завершения действий (например, авторизации)
+            time.sleep(90)  # Временное решение, лучше заменить на WebDriverWait
+
+        finally:
+            driver.quit()
+
+        return f"Request mocked successfully, return to the {MAIN_URL} page"
+    
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

@@ -21,11 +21,12 @@ def get_news(query: str) -> List[Tuple[str, str]]:
     """
 
     current_date = datetime.now().date()
-    one_month_ago = current_date - timedelta(days=30)
+    one_month_ago = current_date - timedelta(days=27)
     response = requests.get(
         f"https://newsapi.org/v2/everything?q={query}&from={one_month_ago}&sortBy=publishedAt&apiKey={NEWSAPI_KEY}"
     )
     data = response.json()
+    # print(data)
     news_data = []
     if data["status"] == "ok" and data["totalResults"] > 0:
         for article in data["articles"]:
